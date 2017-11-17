@@ -1,0 +1,26 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginxconfigmap
+  namespace: javaneiros
+data:
+  nginx.conf: |-
+    upstream tomcat {
+      server tomcat:8080 fail_timeout=0;
+    }
+
+    server {
+      listen 80;
+      server_name javaneiros.anselmopfeifer.com;
+
+      location / {
+          proxy_set_header Host $http_host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-Proto https;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          add_header Pragma "no-cache";
+          proxy_pass http://tomcat;
+          proxy_read_timeout 10s;
+       }
+
+    }

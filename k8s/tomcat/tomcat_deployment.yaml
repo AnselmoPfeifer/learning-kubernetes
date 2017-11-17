@@ -1,0 +1,27 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: tomcat
+  namespace: javaneiros
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tomcat
+    spec:
+      containers:
+      - name: tomcat
+        image: tomcat:9.0.1
+        resources:
+          limits:
+            cpu: 0.7
+            memory: 512Mi
+          requests:
+            cpu: 0.4
+            memory: 256Mi
+        ports:
+        - containerPort: 8080
+        env:
+        - name: JAVA_OPTS
+          value: "-Xmx512M"

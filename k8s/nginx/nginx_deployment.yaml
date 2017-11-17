@@ -1,0 +1,36 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: nginx
+  namespace: javaneiros
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        resources:
+          limits:
+            cpu: 0.4
+            memory: 256Mi
+          requests:
+            cpu: 0.2
+            memory: 126Mi
+        ports:
+        - containerPort: 80
+        env:
+        - name: NGINX_WORKER_PROCESSES
+          value: "auto"
+        - name: NGINX_WORKER_CONNECTIONS
+          value: "auto"
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: configmap-volume
+      volumes:
+      - name: configmap-volume
+        configMap:
+          name: nginxconfigmap
