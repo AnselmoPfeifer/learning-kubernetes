@@ -2,12 +2,13 @@ FROM tomcat:8.5-jre8
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN rm -rf /usr/local/tomcat/webapps/*
+ENV removeDir 'ROOT docs examples'
+
 RUN rm -rf /usr/local/tomcat/work/*
+RUN cd /usr/local/tomcat/webapps/ \
+    && rm -rf ${removeDir}
 
-COPY server.xml /usr/local/tomcat/conf/server.xml
-COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
-
+COPY files/servers.xml /usr/local/tomcat/conf/servers.xml
 COPY files/ROOT /usr/local/tomcat/webapps/ROOT
 
 EXPOSE 8080

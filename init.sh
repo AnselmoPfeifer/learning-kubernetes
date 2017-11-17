@@ -1,15 +1,11 @@
 #!/bin/bash
 
-NS='javaneiros'
-kubectl create namespace ${NS}
+function selectApp() {
+    if  [ $1 == 'java' ]; then 
+        sh java.sh
 
-NS='--namespace javaneiros'
-echo "Instalando o Nginx"
-kubectl apply --filename=k8s/nginx/nginx_configmap.yaml ${NS}
-kubectl apply --filename=k8s/nginx/nginx_service.yaml ${NS}
-kubectl apply --filename=k8s/nginx/nginx_deployment.yaml ${NS}
-
-echo "Instalando o Tomcat"
-kubectl apply --filename=k8s/tomcat/tomcat_configmapusers.yaml ${NS}
-kubectl apply --filename=k8s/tomcat/tomcat_service.yaml ${NS}
-kubectl apply --filename=k8s/tomcat/tomcat_deployment.yaml ${NS}
+    elif [ $1 == 'wordpress' ]; then
+        sh wordpress.sh
+    fi
+}
+selectApp $1
