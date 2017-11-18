@@ -1,5 +1,5 @@
 # learning-kubernetes
-##  Instalar kubectl 
+##  Install kubectl 
 - Debian
 ```
 apt-get update && apt-get install -y apt-transport-https
@@ -28,19 +28,28 @@ systemctl enable kubelet && systemctl start kubelet
 - Links:
     - https://kubernetes.io/docs/setup/independent/install-kubeadm/
 
-## Instalar o minikube:
+## Install minikube:
 ```
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 - chmod +x minikube
 - sudo mv minikube /usr/local/bin/
 ```
-- minikube start / tart a vm com a instalacao base do kubernetes
-- minikube dashboard / Abre o painel de admin do kubernetes
+- minikube start / Start new VM
+- minikube dashboard / Open panel admin the kubernetes
 - Links:
     - https://github.com/kubernetes/minikube
 
-## Usando o kubectl
-- kubectl config use-context minikube
-- kubectl config current-context // exibe o contexto atual
+## Using kubectl
+- kubectl config use-context minikube / gce
+- kubectl config current-context / Show context
+- kubectl config set-context gce / Set new context
+
+- kubectl create ns javaneiros
+- kubectl get service --namespace=javaneiros
+- kubectl get pods --namespace=javaneiros
+- kubectl delete pod XYZ --namespace=javaneiros
 
 
+- Links:
+    - https://kubernetes.io
+    - https://www.katacoda.com/courses/kubernetes
