@@ -8,4 +8,5 @@ function selectApp() {
         sh wordpress.sh
     fi
 }
+
 selectApp $1
